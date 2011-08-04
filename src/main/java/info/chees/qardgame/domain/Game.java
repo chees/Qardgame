@@ -17,6 +17,7 @@ public class Game {
 	@Id
 	private Long id;
 	
+	@Serialized
 	private List<Player> players;
 	
 	@Indexed

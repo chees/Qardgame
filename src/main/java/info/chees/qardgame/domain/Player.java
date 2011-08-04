@@ -1,5 +1,6 @@
 package info.chees.qardgame.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Id;
@@ -17,8 +18,13 @@ public class Player {
 	private String name;
 	
 	List<Card> hand;
-
-	////
+	
+	public Player() {}
+	
+	public Player(String name) {
+		this.name = name;
+		hand = new ArrayList<Card>();
+	}
 	
 	public void setId(Long id) {
 		this.id = id;
