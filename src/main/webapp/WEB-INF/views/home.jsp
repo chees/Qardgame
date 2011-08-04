@@ -6,6 +6,22 @@
 
 <qard:generic-page title="jsp.home.title">
 
-<h1>Qardgame</h1>
+<div>
+	Create <a href="/game/create">new game</a>
+</div>
+
+<div>
+	<ul>
+		<c:forEach items="${games}" var="game">
+			<li>
+				Game ${game.id}
+				<a href="/game/${game.id}/display">Display</a>
+				<c:if test="${!game.started}">
+					<a href="/game/${game.id}/join">Join</a>
+				</c:if>
+			</li>
+		</c:forEach>
+	</ul>
+</div>
 
 </qard:generic-page>

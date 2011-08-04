@@ -12,6 +12,10 @@
 </head>
 <body>
 
+<div class="header">
+	<h1><a href="/">Qardgame</a></h1>
+</div>
+
 <jsp:doBody/>
 
 </body>

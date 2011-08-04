@@ -16,14 +16,14 @@ import com.googlecode.objectify.ObjectifyFactory;
 @Controller
 public class GameController {
 	
-	@Autowired private ObjectifyFactory objectifyFactory;
+	@Autowired private ObjectifyFactory ofyFactory;
 	
 	@RequestMapping("/game/create")
 	public String create() {
 		
 		Game game = new Game();
 		
-		Objectify ofy = objectifyFactory.begin();
+		Objectify ofy = ofyFactory.begin();
 		ofy.put(game);
 		
 		return "redirect:/game/"+game.getId()+"/display";
@@ -38,7 +38,8 @@ public class GameController {
 	@RequestMapping("game/{gameId}/displaystate")
 	public @ResponseBody DisplayState displayState(@PathVariable Long gameId, Model model) {
 		
-		Game game = new Game(); // TODO get the game with Objectify
+		Objectify ofy = ofyFactory.begin();
+		Game game = ofy.get(Game.class, gameId);
 		
 		DisplayState displayState = new DisplayState(game);
 		return displayState;
