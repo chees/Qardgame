@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Qardgame</title>
-	<link rel="stylesheet" href="/css/default.css" type="text/css">
-</head>
-<body>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="qard"%>
+
+<qard:generic-page title="jsp.home.title">
+
 <h1>Qardgame</h1>
 
-</body>
-</html>
+</qard:generic-page>
