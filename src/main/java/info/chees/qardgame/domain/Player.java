@@ -2,7 +2,16 @@ package info.chees.qardgame.domain;
 
 import java.util.List;
 
+import javax.persistence.Id;
+
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Unindexed;
+
+@Entity
+@Unindexed
 public class Player {
+	
+	@Id
 	private Long id;
 	
 	private String name;

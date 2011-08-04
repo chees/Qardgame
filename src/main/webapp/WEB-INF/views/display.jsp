@@ -14,6 +14,7 @@ gameId: ${gameId}
 
 <script src="/js/jquery.min.js"></script>
 <script>
+// TODO poll the server:
 $.getJSON('displaystate', function(data) {
 	$('#debug').html(data);
 });

@@ -13,6 +13,8 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<context:component-scan base-package="info.chees.qardgame.controllers" />
 
+	<bean class="com.googlecode.objectify.spring.ObjectifyFactoryBean" p:basePackage="info.chees.qardgame.domain" />
+
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
 	    <property name="prefix" value="/WEB-INF/views/"/>

@@ -11,6 +11,13 @@
 
 	<name>qardgame</name>
 
+	<repositories>
+		<repository>
+			<id>objectify-appengine</id>
+			<url>http://objectify-appengine.googlecode.com/svn/maven</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 
 		<!-- Google App Engine meta-package -->
@@ -117,6 +124,18 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.8.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.googlecode.objectify</groupId>
+			<artifactId>objectify</artifactId>
+			<version>3.0</version>
+		</dependency>
+    
+		<dependency>
+			<groupId>com.googlecode.objectify-appengine-spring</groupId>
+			<artifactId>objectify-appengine-spring</artifactId>
+			<version>1.1.1</version>
 		</dependency>
 	</dependencies>
 

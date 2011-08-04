@@ -1,19 +1,41 @@
 package info.chees.qardgame.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Id;
+
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Indexed;
+import com.googlecode.objectify.annotation.Serialized;
+import com.googlecode.objectify.annotation.Unindexed;
+
+@Entity
+@Unindexed
 public class Game {
+	
+	@Id
 	private Long id;
 	
 	private List<Player> players;
 	
+	@Indexed
 	private boolean started;
 	
 	private int currentPlayer;
 	
+	@Serialized
 	private List<Card> openCards;
 	
+	@Serialized
 	private List<Card> closedCards;
+	
+	public Game() {
+		players = new ArrayList<Player>();
+		started = false;
+		openCards = new ArrayList<Card>();
+		closedCards = Card.createDeck();
+	}
 	
 	////
 	
