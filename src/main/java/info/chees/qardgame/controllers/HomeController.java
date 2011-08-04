@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 	@RequestMapping("/")
 	public String home() {
+		
+		// TODO get list of games
+		
 		return "home";
 	}
 }
