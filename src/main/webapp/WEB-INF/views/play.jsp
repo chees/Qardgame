@@ -19,8 +19,8 @@ function poll() {
 		console.log(data);
 		// TODO
 		gameState = data;
+		setTimeout(poll, 2000);
 	});
-	setTimeout(poll, 2000);
 }
 
 poll();

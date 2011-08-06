@@ -20,6 +20,8 @@ import com.googlecode.objectify.ObjectifyFactory;
 @Controller
 public class GameController {
 	
+	// TODO this class should probably be divided into smaller classes
+	
 	@Autowired private ObjectifyFactory ofyFactory;
 	
 	@RequestMapping("/game/create")
@@ -98,5 +100,19 @@ public class GameController {
 		
 		State state = new State(game);
 		return state;
+	}
+	
+	@RequestMapping(value = "/game/{gameId}/start", method = RequestMethod.POST)
+	public @ResponseBody String start(@PathVariable Long gameId) {
+		// TODO do in a transaction
+		
+		Objectify ofy = ofyFactory.begin();
+		Game game = ofy.get(Game.class, gameId);
+		
+		game.setStarted(true);
+		
+		ofy.put(game);
+		
+		return "";
 	}
 }

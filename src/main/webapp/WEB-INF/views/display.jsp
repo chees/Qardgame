@@ -6,19 +6,23 @@
 
 <qard:generic-page title="jsp.display.title">
 
+<div class="pregame">
+	<a href="#" class="start">Start</a>
+	
+	Use your phone to scan the QR code or go to <span class="joinLink"></span> to join this game.
+</div>
+
 <div class="players">
 </div>
 
-<div class="pregame">
-	<div class="start">
-		<a href="start">Start</a>
-	</div>
-	
-	User your phone to scan the QR code or go to <span class="joinLink"></span> to join the game.
-</div>
 
 <script src="/js/jquery.min.js"></script>
 <script>
+
+$('.start').click(function(e) {
+	$.post('start'); // TODO send adminId along
+	e.preventDefault();
+});
 
 var joinLink = window.location.href.substring(0, window.location.href.length - 'display'.length) + 'join';
 $('.joinLink').html(joinLink);
@@ -38,8 +42,8 @@ function poll() {
 			$('.players').append('<div>'+data.players[i]+'</div>');
 		}
 		gameState = data;
+		setTimeout(poll, 2000);
 	});
-	setTimeout(poll, 2000);
 }
 
 poll();

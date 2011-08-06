@@ -8,8 +8,12 @@
 
 <form method="post" action="join">
 	What is your name?
-	<input name="name" /><br />
+	<input name="name" id="name" /><br />
 	<input type="submit" value="Join" />
 </form>
+
+<script>
+document.getElementById('name').focus();
+</script>
 
 </qard:generic-page>
