@@ -1,5 +1,6 @@
 package info.chees.qardgame.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,10 @@ import com.googlecode.objectify.annotation.Unindexed;
 
 @Entity
 @Unindexed
-public class Player {
+public class Player implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private Long id;
 	

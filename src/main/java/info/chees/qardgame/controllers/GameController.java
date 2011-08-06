@@ -3,6 +3,7 @@ package info.chees.qardgame.controllers;
 import info.chees.qardgame.domain.Game;
 import info.chees.qardgame.domain.Player;
 import info.chees.qardgame.viewmodels.DisplayState;
+import info.chees.qardgame.viewmodels.State;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,8 +34,7 @@ public class GameController {
 	}
 	
 	@RequestMapping("/game/{gameId}/display")
-	public String display(@PathVariable Long gameId, Model model) {
-		model.addAttribute("gameId", gameId);
+	public String display() {
 		return "display";
 	}
 	
@@ -79,9 +79,24 @@ public class GameController {
 		
 		game.getPlayers().add(new Player(name));
 		
-		ofy.put(Game.class, game);
-		System.out.println("Number of players: "+game.getPlayers().size());
+		ofy.put(game);
 		
-		return "redirect:/game/"+gameId+"/play";
+		return "redirect:/game/"+gameId;
+	}
+	
+	@RequestMapping("/game/{gameId}")
+	public String play(@PathVariable Long gameId, Model model) {
+		model.addAttribute("gameId", gameId);
+		return "play";
+	}
+	
+	@RequestMapping("/game/{gameId}/state")
+	public @ResponseBody State state(@PathVariable Long gameId, Model model) {
+		
+		Objectify ofy = ofyFactory.begin();
+		Game game = ofy.get(Game.class, gameId);
+		
+		State state = new State(game);
+		return state;
 	}
 }

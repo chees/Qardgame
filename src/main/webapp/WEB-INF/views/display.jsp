@@ -6,18 +6,43 @@
 
 <qard:generic-page title="jsp.display.title">
 
-TODO display the public game state<br />
-gameId: ${gameId}
+<div class="players">
+</div>
 
-<div id="debug">
+<div class="pregame">
+	<div class="start">
+		<a href="start">Start</a>
+	</div>
+	
+	User your phone to scan the QR code or go to <span class="joinLink"></span> to join the game.
 </div>
 
 <script src="/js/jquery.min.js"></script>
 <script>
-// TODO poll the server:
-$.getJSON('displaystate', function(data) {
-	$('#debug').html(data);
-});
+
+var joinLink = window.location.href.substring(0, window.location.href.length - 'display'.length) + 'join';
+$('.joinLink').html(joinLink);
+var qrsrc = 'http://chart.googleapis.com/chart?chs=128x128&cht=qr&chld=M|0&chl=' + encodeURIComponent(joinLink);
+$('.pregame').append('<img src="'+qrsrc+'" />');
+
+var gameState = {};
+
+function poll() {
+	$.getJSON('displaystate', function(data) {
+		console.log(data);
+		if(data.started && !gameState.started) {
+			$('.pregame').hide('slow');
+		}
+		$('.players').html('');
+		for(var i = 0; i < data.players.length; i++) {
+			$('.players').append('<div>'+data.players[i]+'</div>');
+		}
+		gameState = data;
+	});
+	setTimeout(poll, 2000);
+}
+
+poll();
 </script>
 
 
