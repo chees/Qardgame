@@ -19,6 +19,8 @@ public class State {
 		started = game.isStarted();
 		yourTurn = false; // TODO
 		cards = new ArrayList<Card>(); // TODO
+		cards.add(new Card(3, Card.Suit.CLUBS));
+		cards.add(new Card(11, Card.Suit.DIAMONDS));
 	}
 	
 	public boolean isStarted() {
