@@ -1,5 +1,6 @@
 package info.chees.qardgame.controllers;
 
+import info.chees.qardgame.domain.Card;
 import info.chees.qardgame.domain.Game;
 import info.chees.qardgame.domain.Player;
 import info.chees.qardgame.viewmodels.DisplayState;
@@ -67,7 +68,7 @@ public class GameController {
 	}
 	
 	@RequestMapping(value = "/game/{gameId}/join", method = RequestMethod.POST)
-	public String joinPost(@PathVariable Long gameId, @RequestParam("name") String name, Model model) {
+	public String joinPost(@PathVariable Long gameId, @RequestParam String name, Model model) {
 		
 		// TODO do in a transaction?
 		
@@ -95,10 +96,13 @@ public class GameController {
 	@RequestMapping("/game/{gameId}/state")
 	public @ResponseBody State state(@PathVariable Long gameId, Model model) {
 		
+		// TODO get the userId
+		String userId = "1";
+		
 		Objectify ofy = ofyFactory.begin();
 		Game game = ofy.get(Game.class, gameId);
 		
-		State state = new State(game);
+		State state = new State(game, userId);
 		return state;
 	}
 	
@@ -109,7 +113,35 @@ public class GameController {
 		Objectify ofy = ofyFactory.begin();
 		Game game = ofy.get(Game.class, gameId);
 		
-		game.setStarted(true);
+		game.start();
+		
+		ofy.put(game);
+		
+		return "";
+	}
+	
+	@RequestMapping(value = "/game/{gameId}/play", method = RequestMethod.POST)
+	public @ResponseBody
+	String play(@PathVariable Long gameId, @RequestParam int cardNumber,
+			@RequestParam Card.Suit cardSuit, @RequestParam String userId) {
+		// TODO transaction?
+		
+		System.out.println(cardNumber);
+		System.out.println(cardSuit);
+		
+		Objectify ofy = ofyFactory.begin();
+		Game game = ofy.get(Game.class, gameId);
+		
+		Player currentPlayer = game.getPlayers().get(game.getCurrentPlayer());
+		// TODO check if currentPlayer.userId == userId
+		
+		Card card = new Card(cardNumber, cardSuit);
+		
+		if(!currentPlayer.getHand().remove(card)) {
+			throw new RuntimeException("/me mutters something about cheaters");
+		}
+		
+		game.getOpenCards().add(card);
 		
 		ofy.put(game);
 		

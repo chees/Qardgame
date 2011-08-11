@@ -66,6 +66,9 @@
 </div>
 
 <script src="/js/jquery.min.js"></script>
+<script>
+var gameId = ${gameId};
+</script>
 <script src="/js/play.js"></script>
 
 </body>

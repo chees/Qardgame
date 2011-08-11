@@ -38,6 +38,17 @@ public class Game {
 		closedCards = Card.createDeck();
 	}
 	
+	public void start() {
+		started = true;
+		Card card = closedCards.remove(0);
+		openCards.add(card);
+		for(Player p : players) {
+			for(int i = 0; i < 7; i++) {
+				p.getHand().add(closedCards.remove(0));
+			}
+		}
+	}
+	
 	////
 	
 	public Long getId() {
@@ -86,6 +97,15 @@ public class Game {
 
 	public void setClosedCards(List<Card> closedCards) {
 		this.closedCards = closedCards;
+	}
+
+	public Player getPlayerById(String id) {
+		for(Player p : players) {
+			if(p.getId().equals(id)) {
+				return p;
+			}
+		}
+		return null;
 	}
 	
 }

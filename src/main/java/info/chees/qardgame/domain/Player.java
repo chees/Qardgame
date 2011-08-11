@@ -4,36 +4,33 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Id;
+import com.googlecode.objectify.annotation.Serialized;
 
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Unindexed;
-
-@Entity
-@Unindexed
 public class Player implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	private Long id;
+	private String id;
 	
+	@Serialized
 	private String name;
 	
-	List<Card> hand;
+	@Serialized
+	private List<Card> hand;
 	
 	public Player() {}
 	
 	public Player(String name) {
+		id = "1"; // TODO generate UUID
 		this.name = name;
 		hand = new ArrayList<Card>();
 	}
 	
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -43,5 +40,13 @@ public class Player implements Serializable {
 
 	public String getName() {
 		return name;
+	}
+
+	public void setHand(List<Card> hand) {
+		this.hand = hand;
+	}
+
+	public List<Card> getHand() {
+		return hand;
 	}
 }

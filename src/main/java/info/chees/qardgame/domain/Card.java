@@ -2,6 +2,7 @@ package info.chees.qardgame.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Card implements Serializable {
@@ -25,12 +26,14 @@ public class Card implements Serializable {
 	}
 
 	public static List<Card> createDeck() {
+		// TODO create jokers
 		List<Card> deck = new ArrayList<Card>();
 		for(Suit s : Suit.values()) {
 			for(int i = 1; i <= 13; i++) {
 				deck.add(new Card(i, s));
 			}
 		}
+		Collections.shuffle(deck);
 		return deck;
 	}
 	
@@ -48,5 +51,17 @@ public class Card implements Serializable {
 
 	public Suit getSuit() {
 		return suit;
+	}
+	
+	@Override
+	public boolean equals(Object that) {
+		if (this == that)
+			return true;
+		if (!(that instanceof Card))
+			return false;
+		Card card = (Card) that;
+		if (card.suit == suit && card.number == number)
+			return true;
+		return false;
 	}
 }

@@ -2,8 +2,8 @@ package info.chees.qardgame.viewmodels;
 
 import info.chees.qardgame.domain.Card;
 import info.chees.qardgame.domain.Game;
+import info.chees.qardgame.domain.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class State {
@@ -15,12 +15,18 @@ public class State {
 
 	public State() {}
 	
-	public State(Game game) {
+	public State(Game game, String userId) {
 		started = game.isStarted();
-		yourTurn = false; // TODO
-		cards = new ArrayList<Card>(); // TODO
-		cards.add(new Card(3, Card.Suit.CLUBS));
-		cards.add(new Card(11, Card.Suit.DIAMONDS));
+		
+		Player player = game.getPlayerById(userId);
+		
+		Player currentPlayer = game.getPlayers().get(game.getCurrentPlayer());
+		if(currentPlayer == player)
+			yourTurn = true;
+		else
+			yourTurn = false;
+		
+		cards = player.getHand();
 	}
 	
 	public boolean isStarted() {
